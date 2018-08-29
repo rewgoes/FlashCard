@@ -1,5 +1,5 @@
 import { AsyncStorage } from 'react-native'
-import { DECKS_STORAGE_KEY, setDummyData } from './_flashcards'
+import { DECKS_STORAGE_KEY, DEBUG_CLEAR_STORAGE, setDummyData } from './_flashcards'
 
 export function getDecks() {
   return AsyncStorage.getItem(DECKS_STORAGE_KEY)
@@ -24,8 +24,14 @@ export function addCardToDeck(title, card) {
 }
 
 function getAllDecks(decks) {
+  if (DEBUG_CLEAR_STORAGE) {
+    console.log("Cleaning up storage")
+    AsyncStorage.removeItem(DECKS_STORAGE_KEY)
+    decks = null
+  }
+
   if (decks === null && __DEV__) {
-    // Set dummy data in case storage is empty
+    console.log("Populate DB with dummy data")
     return setDummyData()
   } else {
     return JSON.parse(decks)

@@ -1,10 +1,12 @@
 import { AsyncStorage } from 'react-native'
 
+export const DEBUG_CLEAR_STORAGE = false
 export const DECKS_STORAGE_KEY = 'FlashCards:decks'
 
 export function setDummyData() {
   let dummyData = {
     React: {
+      key: 'React',
       title: 'React',
       questions: [
         {
@@ -26,6 +28,7 @@ export function setDummyData() {
       ]
     },
     JavaScript: {
+      key: 'JavaScript',
       title: 'JavaScript',
       questions: [
         {
