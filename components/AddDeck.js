@@ -8,14 +8,17 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { primaryColor, primaryLightColor, primaryDarkColor, primaryTextColor, gray, white } from './../utils/colors'
+import { connect } from 'react-redux'
+import { saveDeckTitle } from '../utils/api'
+import { addDeck } from '../actions'
 
 function SubmitBtn({ onPress, isDisabled }) {
   return (
     <TouchableOpacity
-     disabled={isDisabled}
+      disabled={isDisabled}
       style={[
         Platform.OS === 'ios' ? styles.iosSubmitBtn : styles.AndroidSubmitBtn,
-        isDisabled ? {backgroundColor : primaryLightColor} : {backgroundColor : primaryDarkColor}
+        isDisabled ? { backgroundColor: primaryLightColor } : { backgroundColor: primaryDarkColor }
       ]}
       onPress={onPress}>
       <Text style={styles.submitBtnText}>SUBMIT</Text>
@@ -23,13 +26,32 @@ function SubmitBtn({ onPress, isDisabled }) {
   )
 }
 
-export default class AddDeck extends Component {
+class AddDeck extends Component {
   state = {
-    deckName: '',
+    deckName: "",
+  }
+
+  submit = () => {
+    const deckTitle = this.state.deckName
+
+    const deck = {
+      key: deckTitle,
+      title: deckTitle,
+      questions: []
+    }
+
+    this.props.dispatch(addDeck({
+      [deckTitle]: deck
+    }))
+
+    this.props.navigation.goBack();
+
+    saveDeckTitle(deckTitle)
   }
 
   render() {
     const { deckName } = this.state
+
     return (
       <KeyboardAvoidingView behavior='padding' style={styles.container}>
         <Text>What's the title of your deck?</Text>
@@ -41,7 +63,7 @@ export default class AddDeck extends Component {
           onChangeText={
             (deckName) => this.setState({ deckName })
           } />
-        <SubmitBtn onPress={() => alert("Bla")} isDisabled={!deckName} />
+        <SubmitBtn onPress={this.submit} isDisabled={!deckName} />
       </KeyboardAvoidingView>
     )
   }
@@ -89,3 +111,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
+
+export default connect()(AddDeck)
