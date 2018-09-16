@@ -7,6 +7,7 @@ import { Ionicons } from '@expo/vector-icons'
 import { createStackNavigator } from 'react-navigation'
 import DeckList from './components/DeckList'
 import AddDeck from './components/AddDeck'
+import DeckDetail from './components/DeckDetail'
 import { primaryColor, primaryTextColor } from './utils/colors'
 
 const MainNavigator = createStackNavigator({
@@ -36,6 +37,15 @@ const MainNavigator = createStackNavigator({
     screen: AddDeck,
     navigationOptions: {
       title: "New Deck",
+      headerTintColor: primaryTextColor,
+      headerStyle: {
+        backgroundColor: primaryColor,
+      },
+    }
+  },
+  DeckDetail: {
+    screen: DeckDetail,
+    navigationOptions: {
       headerTintColor: primaryTextColor,
       headerStyle: {
         backgroundColor: primaryColor,

@@ -44,7 +44,11 @@ class AddDeck extends Component {
       [deckTitle]: deck
     }))
 
-    this.props.navigation.goBack();
+    this.props.navigation.pop()
+    this.props.navigation.navigate(
+      'DeckDetail',
+      { deckKey: deckTitle }
+    )
 
     saveDeckTitle(deckTitle)
   }

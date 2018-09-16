@@ -36,9 +36,16 @@ class DeckList extends Component {
     return (
       <View style={{ flex: 1 }}>
         <FlatList
+          style={{ flexGrow: 1 }}
+          contentContainerStyle={{ paddingBottom: 16, paddingTop: 16 }}
           data={deckList}
+          ItemSeparatorComponent={() => <View style={{ height: 10 }} />}
           renderItem={({ item }) =>
-            <TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => this.props.navigation.navigate(
+                'DeckDetail',
+                { deckKey: item.key }
+              )}>
               <View style={styles.item} >
                 <Text style={styles.itemTitle}>{item.title}</Text>
                 <Text>
@@ -62,7 +69,6 @@ const styles = StyleSheet.create({
     padding: 20,
     marginLeft: 10,
     marginRight: 10,
-    marginTop: 17,
     alignItems: 'center',
     shadowRadius: 3,
     shadowOpacity: 0.8,
