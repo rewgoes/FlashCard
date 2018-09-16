@@ -14,7 +14,7 @@ function AddCardBtn({ onPress }) {
     <TouchableOpacity
       style={styles.addBtn}
       onPress={onPress}>
-      <Text style={styles.addBtnText}>Add question</Text>
+      <Text style={styles.addBtnText}>Add card</Text>
     </TouchableOpacity>
   )
 }
@@ -32,6 +32,14 @@ function StartQuizBtn({ onPress, isDisabled }) {
 }
 
 class DeckDetail extends Component {
+  static navigationOptions = ({ navigation }) => {
+    const { deckKey } = navigation.state.params
+
+    return {
+      title: deckKey
+    }
+  }
+
   render() {
     const { deck } = this.props
 
@@ -46,7 +54,7 @@ class DeckDetail extends Component {
           </Text>
         </View>
         <StartQuizBtn isDisabled={deck.questions.length <= 0} />
-        <AddCardBtn />
+        <AddCardBtn onPress={() => this.props.navigation.navigate('AddCard')} />
       </View>
     )
   }

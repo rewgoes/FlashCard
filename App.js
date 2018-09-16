@@ -8,6 +8,7 @@ import { createStackNavigator } from 'react-navigation'
 import DeckList from './components/DeckList'
 import AddDeck from './components/AddDeck'
 import DeckDetail from './components/DeckDetail'
+import AddCard from './components/AddCard'
 import { primaryColor, primaryTextColor } from './utils/colors'
 
 const MainNavigator = createStackNavigator({
@@ -46,6 +47,16 @@ const MainNavigator = createStackNavigator({
   DeckDetail: {
     screen: DeckDetail,
     navigationOptions: {
+      headerTintColor: primaryTextColor,
+      headerStyle: {
+        backgroundColor: primaryColor,
+      },
+    }
+  },
+  AddCard: {
+    screen: AddCard,
+    navigationOptions: {
+      title: "New Card",
       headerTintColor: primaryTextColor,
       headerStyle: {
         backgroundColor: primaryColor,
