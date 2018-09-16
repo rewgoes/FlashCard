@@ -7,11 +7,16 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
+import { primaryColor, primaryLightColor, primaryDarkColor, primaryTextColor, gray, white } from './../utils/colors'
 
-function SubmitBtn({ onPress }) {
+function SubmitBtn({ onPress, isDisabled }) {
   return (
     <TouchableOpacity
-      style={Platform.OS === 'ios' ? styles.iosSubmitBtn : styles.AndroidSubmitBtn}
+     disabled={isDisabled}
+      style={[
+        Platform.OS === 'ios' ? styles.iosSubmitBtn : styles.AndroidSubmitBtn,
+        isDisabled ? {backgroundColor : primaryLightColor} : {backgroundColor : primaryDarkColor}
+      ]}
       onPress={onPress}>
       <Text style={styles.submitBtnText}>SUBMIT</Text>
     </TouchableOpacity>
@@ -29,12 +34,14 @@ export default class AddDeck extends Component {
       <KeyboardAvoidingView behavior='padding' style={styles.container}>
         <Text>What's the title of your deck?</Text>
         <TextInput style={styles.input}
+          underlineColorAndroid={primaryColor}
+          selectionColor={primaryLightColor}
           placeholder={"Deck Title"}
           value={deckName}
           onChangeText={
             (deckName) => this.setState({ deckName })
           } />
-        <SubmitBtn />
+        <SubmitBtn onPress={() => alert("Bla")} isDisabled={!deckName} />
       </KeyboardAvoidingView>
     )
   }
@@ -43,7 +50,7 @@ export default class AddDeck extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: white,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -54,16 +61,16 @@ const styles = StyleSheet.create({
     marginTop: 50,
     borderRadius: 5,
     borderWidth: 2,
-    borderColor: 'gray'
+    borderColor: gray
   },
   submitBtnText: {
-    color: 'white',
+    color: primaryTextColor,
     fontSize: 22,
     textAlign: 'center',
   },
   iosSubmitBtn: {
     marginTop: 50,
-    backgroundColor: 'gray',
+    backgroundColor: gray,
     padding: 10,
     borderRadius: 7,
     height: 45,
@@ -72,7 +79,7 @@ const styles = StyleSheet.create({
   },
   AndroidSubmitBtn: {
     marginTop: 50,
-    backgroundColor: 'gray',
+    backgroundColor: gray,
     padding: 10,
     paddingLeft: 30,
     paddingRight: 30,

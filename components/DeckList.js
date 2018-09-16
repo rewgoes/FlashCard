@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { receiveDecks } from '../actions'
 import { isEmpty } from '../utils/helpers'
 import { AppLoading } from 'expo'
+import { white } from './../utils/colors'
 
 class DeckList extends Component {
   state = {
@@ -56,7 +57,7 @@ class DeckList extends Component {
 
 const styles = StyleSheet.create({
   item: {
-    backgroundColor: 'white',
+    backgroundColor: white,
     borderRadius: Platform.OS === 'ios' ? 16 : 2,
     padding: 20,
     marginLeft: 10,

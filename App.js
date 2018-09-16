@@ -7,15 +7,16 @@ import { Ionicons } from '@expo/vector-icons'
 import { createStackNavigator } from 'react-navigation'
 import DeckList from './components/DeckList'
 import AddDeck from './components/AddDeck'
+import { primaryColor, primaryTextColor } from './utils/colors'
 
 const MainNavigator = createStackNavigator({
   Home: {
     screen: DeckList,
     navigationOptions: ({ navigation }) => ({
       title: "Flashcards",
-      headerTintColor: 'white',
+      headerTintColor: primaryTextColor,
       headerStyle: {
-        backgroundColor: 'purple',
+        backgroundColor: primaryColor,
       },
       headerRight: (
         <TouchableOpacity onPress={() => navigation.navigate('AddDeck')}>
@@ -25,7 +26,7 @@ const MainNavigator = createStackNavigator({
             justifyContent: 'center',
             marginRight: 10,
           }}>
-            <Ionicons name='md-add' color='white' size={28} />
+            <Ionicons name='md-add' color={primaryTextColor} size={28} />
           </View>
         </TouchableOpacity>
       ),
@@ -35,9 +36,9 @@ const MainNavigator = createStackNavigator({
     screen: AddDeck,
     navigationOptions: {
       title: "New Deck",
-      headerTintColor: 'white',
+      headerTintColor: primaryTextColor,
       headerStyle: {
-        backgroundColor: 'purple',
+        backgroundColor: primaryColor,
       },
     }
   }
