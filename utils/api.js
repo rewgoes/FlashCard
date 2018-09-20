@@ -17,9 +17,9 @@ export function getDeck(title) {
     .then((deck) => deck[title])
 }
 
-export function addCardToDeck(title, card) {
+export function saveCardToDeck({key, cards}) {
   return AsyncStorage.mergeItem(DECKS_STORAGE_KEY, JSON.stringify({
-    [title]: { questions: card }
+    [key]: { questions: cards }
   }))
 }
 
@@ -34,6 +34,7 @@ function getAllDecks(decks) {
     console.log("Populate DB with dummy data")
     return setDummyData()
   } else {
+    console.log(JSON.parse(decks))
     return JSON.parse(decks)
   }
 }

@@ -9,8 +9,8 @@ import {
 } from 'react-native';
 import { primaryColor, primaryLightColor, primaryDarkColor, primaryTextColor, gray, white } from './../utils/colors'
 import { connect } from 'react-redux'
-import { saveDeckTitle } from '../utils/api'
-import { addDeck } from '../actions'
+import { saveCardToDeck } from '../utils/api'
+import { addCardToDeck } from '../actions'
 
 function SubmitBtn({ onPress, isDisabled }) {
   return (
@@ -33,25 +33,23 @@ class AddCard extends Component {
   }
 
   submit = () => {
-    // const deckTitle = this.state.deckName
+    const { deck } = this.props
 
-    // const deck = {
-    //   key: deckTitle,
-    //   title: deckTitle,
-    //   questions: []
-    // }
+    const card = {
+      question: this.state.question,
+      answer: this.state.answer
+    }
 
-    // this.props.dispatch(addDeck({
-    //   [deckTitle]: deck
-    // }))
+    deck.questions.push(card)
 
-    // this.props.navigation.pop()
-    // this.props.navigation.navigate(
-    //   'DeckDetail',
-    //   { deckKey: deckTitle }
-    // )
+    this.props.dispatch(addCardToDeck({
+      key: deck.key,
+      cards: deck.questions
+    }))
 
-    // saveDeckTitle(deckTitle)
+    this.props.navigation.goBack()
+
+    saveCardToDeck({ key: deck.key, cards: deck.questions })
   }
 
   render() {
@@ -124,4 +122,14 @@ const styles = StyleSheet.create({
   },
 });
 
-export default connect()(AddCard)
+function mapStateToProps(state, { navigation }) {
+  const { deckKey } = navigation.state.params
+
+  return {
+    deck: state[deckKey],
+  }
+}
+
+export default connect(
+  mapStateToProps
+)(AddCard)
