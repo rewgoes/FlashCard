@@ -53,7 +53,10 @@ class DeckDetail extends Component {
               : "question"}
           </Text>
         </View>
-        <StartQuizBtn isDisabled={deck.questions.length <= 0} />
+        <StartQuizBtn isDisabled={deck.questions.length <= 0} onPress={() => this.props.navigation.navigate(
+          'Quiz',
+          { deckKey: deck.key }
+        )} />
         <AddCardBtn onPress={() => this.props.navigation.navigate(
           'AddCard',
           { deckKey: deck.key }

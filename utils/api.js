@@ -34,7 +34,6 @@ function getAllDecks(decks) {
     console.log("Populate DB with dummy data")
     return setDummyData()
   } else {
-    console.log(JSON.parse(decks))
     return JSON.parse(decks)
   }
 }

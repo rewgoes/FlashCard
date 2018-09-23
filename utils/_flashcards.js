@@ -10,7 +10,7 @@ export function setDummyData() {
       title: 'React',
       questions: [
         {
-          question: 'Does React Native word with Android',
+          question: 'Does React Native work with Android',
           answer: 'Yes!'
         },
         {

@@ -9,6 +9,7 @@ import DeckList from './components/DeckList'
 import AddDeck from './components/AddDeck'
 import DeckDetail from './components/DeckDetail'
 import AddCard from './components/AddCard'
+import Quiz from './components/Quiz'
 import { primaryColor, primaryTextColor } from './utils/colors'
 
 const MainNavigator = createStackNavigator({
@@ -62,7 +63,16 @@ const MainNavigator = createStackNavigator({
         backgroundColor: primaryColor,
       },
     }
-  }
+  },
+  Quiz: {
+    screen: Quiz,
+    navigationOptions: {
+      headerTintColor: primaryTextColor,
+      headerStyle: {
+        backgroundColor: primaryColor,
+      },
+    }
+  },
 })
 
 export default class App extends React.Component {
