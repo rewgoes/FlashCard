@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import { primaryTextColor, white, primaryDarkColor, primaryLightColor } from './../utils/colors'
 import { connect } from 'react-redux'
+import { clearLocalNotification, setLocalNotification } from '../utils/helpers'
 
 function QuizBtn({ type, onPress }) {
   return (
@@ -25,6 +26,11 @@ function QuizBtn({ type, onPress }) {
 }
 
 class Quiz extends Component {
+  restartNotification() {
+    clearLocalNotification()
+      .then(setLocalNotification());
+  }
+
   state = {
     currentQuestion: 0,
     showAnswer: false,
@@ -89,12 +95,18 @@ class Quiz extends Component {
               <Text style={styles.result}>{correctCount}/{deck.questions.length}</Text>
             </View>
             <View style={styles.buttonsContainer}>
-              <QuizBtn type={"Restart"} onPress={() => this.setState({
-                currentQuestion: 0,
-                correctCount: 0,
-                showAnswer: false
-              })} />
-              <QuizBtn type={"Back to deck"} onPress={() => this.props.navigation.goBack()} />
+              <QuizBtn type={"Restart"} onPress={() => {
+                this.restartNotification()
+                this.setState({
+                  currentQuestion: 0,
+                  correctCount: 0,
+                  showAnswer: false
+                })
+              }} />
+              <QuizBtn type={"Back to deck"} onPress={() => {
+                this.restartNotification()
+                this.props.navigation.goBack()
+              }} />
             </View>
           </View>
         )}
