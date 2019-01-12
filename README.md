@@ -10,6 +10,9 @@ A mobile application (Android or iOS - or both) that allows users to study colle
 ## Important
 The application was only tested in Android.
 
+## Screenshots
+![screen](../master/res/flashcard.gif)
+
 ## Create React App
 
 This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app).
